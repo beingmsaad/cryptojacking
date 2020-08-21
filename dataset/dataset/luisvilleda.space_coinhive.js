@@ -1,0 +1,6 @@
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"
+"<html>\r\n<meta charset=\"utf-8\">\r\n<p>Error 404 - Laman tidak ditemukan</p>\r\n<p>Maaf, halaman yang Anda cari telah dihapus. Kami sarankan Anda memulai pencarian <a href=\"/\">Beranda</a></p>\r\n</html>"

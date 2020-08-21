@@ -1,0 +1,1 @@
+"<html>\n  <head>\n    <meta http-equiv='refresh' content='5; url=http://www.newsaline.co.uk/' />\n  </head>\n  <body>\n    You are being redirected to http://www.newsaline.co.uk\n  </body>\n</html>\n"
