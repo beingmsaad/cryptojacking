@@ -1,1 +1,0 @@
-"<!DOCTYPE html>\n<html>\n<head>\n\t<title>Страница не найдена</title>\n    <link type=\"text/css\" rel=\"stylesheet\" href=\"/templates/buysell/css/theme-errors.css\">\n</head>\n<body>\n\n    <div id=\"error404\">\n        <h1>404</h1>\n        <h2>Страница не найдена</h2>\n        <p><a href=\"https://russiapokemongo.ru\">Вернуться на главную</a></p>\n    </div>\n\n</body>\n"
