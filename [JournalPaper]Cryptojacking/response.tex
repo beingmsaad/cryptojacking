@@ -1,0 +1,240 @@
+\documentclass{abmart}
+\usepackage{amsmath,amssymb,amsfonts,chemarrow,balance}
+\usepackage{graphicx}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\let\labelindent\relax
+\usepackage[inline]{enumitem}
+\usepackage{mathenv}
+\usepackage[english]{babel}
+\usepackage{breqn}
+\newcommand{\BfPara}[1]{{\noindent\bf#1.}\xspace\xspace}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage{multirow}
+\newcommand{\vs}[1]{{\vspace{-#1mm}}}
+\DeclareMathOperator*{\minimize}{minimize}
+\newcommand{\noteX}[1]{[\textcolor{red}{#1}]}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{upquote}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage{caption}
+\newcommand{\note}[1]{}    
+\newcommand{\slx}{{\em Selenium}\xspace}
+\newcommand{\ch}{{\em Coinhive}\xspace}
+\newcommand{\js}{{\em JavaScript}\xspace}
+\newcommand{\pl}{{\em Plato}\xspace}
+\newcommand{\az}[1]{{\textcolor{blue}{[#1]}}}
+\newcommand{\am}[1]{\textcolor{green!50!black}{[#1]}}
+\newcommand{\bc}{{Bitcoin}\xspace}
+\newcommand{\bcc}{{blockchain}\xspace}
+\newcommand{\Bbc}{{Blockchain}\xspace}
+\newcommand{\etc}{{etc.}\xspace}
+\newcommand{\eg}{{\em e.g.}\xspace}
+\newcommand{\ie}{{\em i.e.,}\xspace}
+\newcommand{\cc}{{cryptocurrency}\xspace}
+\newcommand{\Cc}{{Cryptocurrency}\xspace}
+\newcommand{\ddos}{{DDoS}\xspace}
+\newcommand{\cj}{cryptojacking\xspace}
+\newcommand\JSONnumbervaluestyle{\color{blue}}
+\newcommand\JSONstringvaluestyle{\color{red}}
+\renewcommand*{\figureautorefname}{Fig.}
+\newcommand{\tsref}[1]{\textsection\ref{#1}\xspace}
+\newcommand{\todo}[1]{{\color{red}{[TODO: #1]}}}
+\newcommand{\etal}{{\em et al.}\xspace}
+\newcommand{\parag}[1]{{\noindent\bf#1}}
+\newcommand{\subfigureautorefname}{\figureautorefname}
+
+\title{A Systematic Analysis of In-browser Cryptojacking}
+\author{Muhammad Saad and David Mohaisen}
+\journal{ACM Transactions on the Web}
+% \doi{12345}
+
+\begin{document}
+
+\maketitle
+
+\section{Major Concern.}
+
+{\color{blue}We thank the reviewers for their valuable and constructive feedback. A major concern raised by all reviewers is the dataset size for static analysis. During our study, we observed that only eight unique \cj platforms were used by all \cj websites. From that observation, we decided to create a platform-agnostic detection scheme that could uniquely distinguish between \cj scripts from all other forms of \js running on a website. To that end, our detection scheme was useful to meet that objective with a high accuracy. However, as noted by the reviewers, the accuracy of a small sample size cannot be generalized on a large scale. To address those concerns, we have performed a new experiment to increase the dataset size. In our new experiment, we scanned all websites in our dataset and identified 620 websites that were up. For each website, we extracted all forms of \js code present on the website. We then queried our original dataset to identify the \cj platforms used by each site and sampled the \cj code. Using that, we created two classes for static analysis. In the first class, we combined all \js codes from each website including the \cj code. In the second class, we only kept the non-\cj~\js code of the website. For each class, we extracted the same set of features that are reported in Table 4 (\ie cyclomatic complexity, halstead difficulty, and distinct operands \etc). From eyeballing, we noticed that \cj codes were uniquely different from other forms of \js on those websites. Therefore, expected a clear distinction between the two classes. For independent validation, we have made our dataset publicly available~\cite{Saad20}. 
+
+Finally, based on Reviewer 1's suggestions, we applied Support Vector Machine (SVM) and Random Forest, in addition to Logistic Regression (LR), Linear Discriminant Analysis (LDA), and $k$-nearest Neighbor ($k$-NN). We divided our dataset into 75\% training and 25\% testing data. All classification models achieved an accuracy of 100\%. We report results from our second experiment in Table 6. To summarize, the \cj~\js codes are distinctly different from other \js codes that can be easily detected by machine learning techniques. }
+
+ 
+
+
+\section{Reviewer \#1}
+
+\subsection{Additional Changes}
+\RC The abstract and introduction do not reflect the additional changes/contributions compared to eCrime paper. The authors should emphasize on their new contributions. For example, no where in those sections, they talk about analyzing the memory footprints of devices during cryptojacking, and they only talk about CPU usage and battery drainage.
+
+\AR {\color{blue}Thank you for your valuable feedback. In the revised manuscript, we have added the following text in Section 1 to reflect changes from~\cite{SaadKM19}.
+
+In addition to the contributions made in~\cite{SaadKM19}, this paper extends our analysis by: (1) providing a more systematic and in-depth background about various aspects of cryptojacking including its prevalence, popularity, and association with blockchain-based cryptocurrencies, (2) highlighting the underpinnings of the Proof-of-Work (PoW) protocol that is responsible for resource consumption in \cj, (3) adapting a supervised learning approach in which we used logistic regression, linear discriminant analysis, k-nearest neighbors, support vector machine, and random forest to improve the detection accuracy, and (3) analyzing the memory footprints of in-browser \cj.
+}    
+
+
+\subsection{Multiple Definitions}
+
+\RC The In-browser cryptojacking concept has been defined and explained in multiple places: in Introduction Section: page 2 line 41, and page 3 line 8, as well as in background section. 
+
+\AR {\color{blue} Thank you for your feedback.  We have removed the text about in-browser \cj from page 3. }
+
+\subsection{Background}
+
+\RC Compared to the eCrime paper, the background is expanded by providing history of bitcoins, and explaining the mining process. However, the paragraphs explaining the main topic (i.e., cryptojacking) are the same as eCrime paper. Also, the cryptojacking subsection does not give extra information compared to what is explained in Introduction section. 
+
+\AR {\color{blue} In the revised manuscript, we have added more details about the background of in-browser \cj. To highlight the differences with~\cite{SaadKM19}, below we contrast the \cj subsections in both papers.  
+
+
+\textbf{eCrime~\cite{SaadKM19}.} In-browser \cj is done by injecting a \js code in a website, allowing it to hijack the processing power of a visitor's device to mine a specific \cc. Generally, \js is automatically executed when a website is loaded. Upon visiting a website with \cj code, the visiting host starts a mining activity, by becoming part of a \cj mining pool.  A key feature of in-browser \cj is being platform-independent: it can be executed on any host, PC, mobile phone, tablet, etc., as long as the web browser running on this host has \js enabled in it. 
+
+\textbf{Current Manuscript.} In-browser \cj is done by injecting a \js code in a website, allowing it to hijack the processing power of a visitor's device to mine a specific \cc. The precise nature of the \cc (\ie, mining protocol, difficulty, and message exchange \etc) is specified by the mining script embedded within a website. Upon visiting a website with \cj code, the browser loads the webpage and executes the \js snippet that contains instructions for mining and data transfer. As a result, the visiting host starts the mining activity by becoming part of a \cj mining pool. A key feature of in-browser \cj is being platform-independent: it can be run on any host, PC, mobile phone, tablet, etc., as long as the web browser running on this host supports \js. \js, however, is one of the most popular web languages and, by default, is enabled in most major browsers. Furthermore, in-browser \cj allows for mining at-scale without requiring any custom hardware: as more visitors visit the website with \cj scripts, more processing power is available for mining. 
+
+}    
+
+
+
+
+\subsection{Dataset}
+
+\RC The dataset includes only 8 unique cryptojacking scripts, 10 benign and 10 malicious scripts. This low number of scripts is a huge limitation, as it is not possible to generalize the result. Also, the crytojacking datasets used in both eCrime paper and this paper are obtained in Feb 2018. It's not clear if the same conclusions still stands at this time. I would suggest the authors to expand their dataset to include more data and more recent data. The features for detecting cryptojacking scripts is the same as those proposed in eCrime paper. It seems the features are extracted from the same dataset that is used for testing. In that case your classifier might have been overfitted. The 100\% precision and recall can be the result of overfitting. 
+
+\AR {\color{blue} See our response to \textbf{Major Concern} in which we have conducted a second experiment on larger dataset. Note that we divide our dataset in 75\% train data and 25\% test data. High precision is due to distinct differences in the features of \cj code and other \js codes on websites. Since the dataset is publicly available~\cite{Saad20}, our results can be externally verified. }
+
+
+\subsection{Identifying Features}
+
+\RC No explanation is provided for using LDA, Logistic Regression and k-nearest Neighbors, and not explanation is provided for not using other common machine learning algorithms such as SVM and Random Forrest.
+
+\AR {\color{blue} Thank you for your feedback. We also applied SVM and Random Forest in our analysis. However, they were later removed since the other three methods sufficed for analysis given high accuracy. However, based on your feedback, we have incorporated them in our revised manuscript for both experiments. Results are reported in Table 5 and Table 6. The following text has been added in the paper.  
+
+
+\BfPara{Support Vector Machine} Support Vector Machine (SVM) is a popular supervised learning model commonly used for classification. For a given dataset with two or more labeled classes, SVM constructs a hyperplane in which samples of each class have a maximum separation. Support vectors are data points that are close to the boundary of the hyperplane that affect the hyperplane orientation and maximize the distances between data points in each class. More precisely, given a vector $x_{i}\in\mathbb{R}^{p}, i=1,...,n$ and a vector $y\in [-1,1]^{n}$ (two classes), SVM seeks to find $w\in\mathbb{R}^{p}$ and $b\in\mathbb{R}$ such that a correct prediction can be made for sign($w^{T}\phi(x)+b$). In other words, learning from prior examples, a new examples is predictably mapped to its correct class. For more details on SVM, we refer to~\cite{ByunL02}. 
+
+ \BfPara{Random Forests} Random forests are ensemble learning methods used for regression and classification. The distinct feature of random forest technique is the ability to reduce overfitting by increasing randomness in samples. For a given dataset, a tree in the ensemble is built for a sample drawn with replacement from the training data. Next, during the tree construction, a maximum split is created between each node for all or a subset of features. These techniques are used to decrease variance in the forest estimator and minimizing prediction errors. For more details on random forests, we refer to~\cite{VerikasGB11}.
+
+
+
+
+\BfPara{Evaluation and Results}  We conduct two experiments to evaluate the performance of our static analysis. For both experiments, we used python's scikit-learn library to implement logistic regression, LDA, k-NN, SVM, and Random Forest classifiers. 
+
+In the first experiment, we used the features in Table 4 as input and assigned three distinct classes for the corresponding category. We performed each experiment 20 times and in Table 5, we report the average. For evaluation, we report the precision, recall, and the F1-score of each model. Our results show that logistic regression and LDA performed well, achieving an accuracy of 100\% as indicated by the value 1.00 for precision, recall, and F1-score. In contrast, k-NN performed relatively poor with 0.93, 0.90, and 0.91 values for precision, recall, and F1-score. SVM and Random Forest performed better than k-NN with 0.96, 0.95, and 0.95 values for precision, recall, and F1-score. As a result, we derive two key conclusions from our experiments. First, the parametric evaluation models are more suitable for our classification problem, and can therefore, serve well for the detection of \cj scripts among other \js codes. Second, the features of the three classes of \js are highly discriminative, indicating the use of unique coding patterns for each category which are easily distinguishable with high accuracy.
+
+For the experiment, we scanned all the websites in our dataset and identified the ones that were still using the \cj scripts. We founds 620 websites that with \cj code. For each website, we scraped the \cj code and all other forms of \js codes. We then created two classes for static analysis. In the first class, we combined all \js codes from each website including the \cj code. In the second class, we only kept the non-\cj~\js code of the website. For each class, we extracted the same set of features that are reported in Table 4 (\ie cyclomatic complexity, halstead difficulty, and distinct operands \etc). From eyeballing, we noticed that \cj codes were uniquely different from other forms of \js on those websites. Therefore, expected a clear distinction between the two classes. For independent validation, we have made our dataset publicly available~\cite{Saad20}.
+
+We divided our dataset into 75\% training data and 25\% testing data and applied the classification techniques. The results from the second experiment show that all classification models achieved an accuracy of 100\%. We report results from both experiments in Table 5 and Table 5 on the main manuscript, and ~\autoref{tab:confusionmatrix} and ~\autoref{tab:confusionmatrix_two} in this document. Our second experiment validated that the features of \cj scripts are highly discriminative from other \js codes that can be detected by all major classification techniques. }
+
+\begin{table}[t]
+\small
+\begin{center}
+\caption{Evaluation metrics obtained after applying classification models on our first dataset. Note that Logistic Regression and Linear Discriminant Analysis achieve 100\% detection accuracy.}
+
+\begin{tabular}{llll}
+                                                   & \textbf{F1-Score}         & \textbf{Precision}        & \textbf{Recall}           \\ \hline
+\multicolumn{1}{l|}{\textbf{Logistic Regression}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{Linear Discriminant}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{k-nearest Neighbors}} & \multicolumn{1}{l|}{0.91} & \multicolumn{1}{l|}{0.93} & \multicolumn{1}{l}{0.90} \\ \hline
+\multicolumn{1}{l|}{\textbf{Support Vector Machine}} & \multicolumn{1}{l|}{0.96} & \multicolumn{1}{l|}{0.95} & \multicolumn{1}{l}{0.95} \\ \hline
+\multicolumn{1}{l|}{\textbf{Random Forest}} & \multicolumn{1}{l|}{0.96} & \multicolumn{1}{l|}{0.95} & \multicolumn{1}{l}{0.95} \\ \hline
+\end{tabular}
+\vs{0}
+\label{tab:confusionmatrix}  
+\end{center}
+\end{table}
+
+
+\begin{table}[t]
+\small
+\begin{center}
+\caption{Evaluation metrics obtained after applying classification models on the second dataset of 620 websites. Given the highly discriminative nature of \cj scripts, all models achieved 100\% accuracy. }
+
+\begin{tabular}{llll}
+                                                   & \textbf{F1-Score}         & \textbf{Precision}        & \textbf{Recall}           \\ \hline
+\multicolumn{1}{l|}{\textbf{Logistic Regression}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{Linear Discriminant}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{k-nearest Neighbors}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{Support Vector Machine}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\multicolumn{1}{l|}{\textbf{Random Forest}} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l|}{1.00} & \multicolumn{1}{l}{1.00} \\ \hline
+\end{tabular}
+\vs{0}
+\label{tab:confusionmatrix_two}  
+\end{center}
+\end{table}
+
+\subsection{Adaptive Adversary}
+
+\RC Explain if and how the adversary can avoid detection by modifying the script to be similar to benign scripts. Is your classifier robust against such adversary? Later in subsection 7.1.2, the authors propose a new method for detecting cryptojacking and show a browser extension can flag the messages exchanged between the user and the server during a cryptojacking session. However the experiment needs to get expanded to also include benign and similar communications, and then report false positives. Also, how the adversary circumvent this approach, e.g., can the adversary include dummy messages to circumvent detection, or can they encrypt the data?
+
+\AR {\color{blue} As shown in our datasets, benign \js codes are uniquely different from \cj codes. Therefore, if an adversary wants to avoid detection, he needs to significantly alter the \cj script so as to achieve indistinguihability from benign scripts. Given the current gap in the feature space, this approach may result in sacrificing functional properties of the \cj code which may not be acceptable to the adversary. Cryptojacking scripts are designed to (1) take control of the CPU power, (2) solve PoW challenges, and (3) maintain a persistent connections with a dropzone server to exchange data. These characteristics are uniquely different from other \js codes that may simply render an image on the website. Therefore, from a developer's standpoint, writing a \cj script that can perform all such functionalities while giving same set of code features that are indistinguishable from an image rendering \js can be hard, and therefore not observed in the wild. 
+
+Similarly, the websocket-based communication in \cj is different from other websocket applications (\ie online chat rooms). The only way to bypass detection in this case (also acknowledged in your comments) is adding an encryption layer or dummy messages that go undetected by the browser extension. However, specifically, in the context of \cj the adversary is trying to maximally use the CPU power of the victim devise and may not want it be wasted in encryption, decryption, or dummy messages. Nevertheless, assuming a worst case, any \cj operation will involve continuous hashing of a {\em nonce} that can be easily detected and stopped.  }
+
+
+\subsection{Additional References}
+\AR {\color{blue} We have incorporated all the references that you mentioned. The following text has been added to the paper.
+
+More recently, Bijamin~\etal~\cite{BijmansBDCCS19} presented a new attack vector in which Internet routers were hijacked to launch man-in-the-middle \cj attacks. They discovered a firmware vulnerability in MikroTik routers that allows adversaries to rewrite outgoing user traffic and inject cryptojacking code in each outgoing web connection. As a result, irrespective of the website being visited, the user device invariably mined \cc for the attacker. Another work by Bijamin\etal~\cite{BijmansBD19} analyzed 204 \cj campaigns launched over the Internet in the last few years. They observed that the majority of \cj campaigns were mostly software-based rather than browser-based. Similarly, Pastrana~\etal~\cite{PastranaS19} performed a longitudinal study of the evolution of illicit cryptomining operations over the Internet. They also studied affinities between underground communities and cryptomining business to uncover the dynamics of various cryptomining campaigns over the last decade. Papadopoulos~\etal~\cite{PapadopoulosIM19} took a closer look on the impact of in-browser \cj on the victim devices. They reported that~\cj websites increase the CPU temperature by$\approx$53\% and decrease the CPU performance by up to 57\%. In a similar context, Meland~\etal~\cite{MelandJS19} derived an opposite conclusion to~\cite{PapadopoulosIM19}, stating that a well-configured \cj attack does not harm a user device and may go unnoticed by the users. In terms of countermeasures, two notable works have been proposed by Kharraz~\etal~\cite{KharrazMMLMMBAB19} and Hong~\etal~\cite{HongZSLYZMYZH18}. In both studies, the authors applied machine learning techniques to extract code-based features from~\cj websites. Note that some of these works~\cite{PastranaS19,BijmansBD19} were conducted after our initial publication~\cite{SaadKM19}, and the authors have acknowledged our contribution. The other works were conducted in parallel to ours and adapted various approaches to tackle with~\cj.  However, our work is unique from the existing literature since we consolidate three major dimensions of in-browser~\cj by performing static, dynamic, and economic analysis. The breadth of our work previews all key constructs that underpin the illicit abuse of web ecosystem to mine cryptocurrencies. Moreover, we also outline limitations of existing detection scheme and provide a roadmap towards more robust countermeasures through dynamic analysis.  
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reviewer \#2}
+
+\subsection{Recent Works and Dataset}
+\RC The recent works [WWW 2019, CCS 2018] which are are highly related but not compared with in this paper, have a larger scale of the measurements, than the 5700 websites studied in this paper. I do not see new findings and measurement insights compared the two works. The dataset for the static analysis is not enough. The authors used just 8 cases to extract some unique features of the cryptojacking scripts. And the experimental results show these features can be used to detect cryptojacking with the accuracy of 100\%. This is not convincing due to the small number of cases used in the study. 
+
+\AR {\color{blue}Thank you for your feedback. The CCS 2018~\cite{HongZSLYZMYZH18} and WWW 2019~\cite{KharrazMMLMMBAB19} papers performed static analysis to detect \cj. Although~\cite{HongZSLYZMYZH18} did not report the evaluation metrics of their detection scheme, however they used a hash-based profiler to extract fingerprints of \cj scripts. In~\cite{KharrazMMLMMBAB19}, the authors extracted 12 features and applied Support Vector Machines and Random Forest to achieve a detection accuracy of $\approx$97\%. In contrast, we perform static, dynamic, and economic analysis. Our static analysis technique achieved a higher accuracy than~\cite{KharrazMMLMMBAB19}. More details about our differences with prior work can be found in response to Review 2.7 and Section 8 in the paper. 
+
+The concern about limited dataset has been addressed in the \textbf{Major Concern} on page 1 of this document. 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reviewer \#3}
+
+\subsection{Motive}
+\RC The tools and the measurement analysis presented in the paper are interesting and in some cases insightful. However, a major question is what the incentive/motive the website owners/developers have behind embedding cryptojacking scripts. The economic incentive is minimal, which even the paper has pointed out. So if there is so little incentive for cryptojacking, will developing and deploying new (potentially, resource-hungry) countermeasures be worth the effort and investment?
+
+\AR {\color{blue} Thank your for your valuable feedback. Indeed, the economic incentives of \cj are minimal. However, as mentioned in Section 7.3,  our dynamic analysis shows that \cj is highly resource intensive, as it causes excessive battery drainage of the target device. As such, \cj attacks can be launched solely to abuse devices of visitors on a specific website, thereby influencing the reputation of the website and its ability to attract users and traffic. Therefore, \cj provides multiple attack avenues for miscreants and we cannot ignore the potential threat of these attacks or their likelihood of becoming more prevalent in the future. Realizing this potential threat, it is important to develop and deploy the attack countermeasures. }
+
+
+
+\AR   The dataset is from 2017-2018. Is this dataset still relevant? Measurement of CPU usage (section 5.1.2): Did you disable JS altogether to determine the baseline? If so, how did you ensure that other legitimate JS scripts in those websites were not disabled?
+
+\AR {\color{blue} The dataset is still relevant since we were able to find more than 600 websites that were performing \cj in 2018. 
+
+In Figure 6, we disabled the \js completely including the legitimate \js. We only used it to demonstrate the effect of \js (\cj or legitimate) on CPU consumption. However, for experiments in Figure 7(a), we kept the legitimate \js running while adjusting the throttling parameter for \cj.    }
+
+\subsection{Minor Issues}
+
+\RC Thank you for pointing out the mistakes. In the revised manuscript, we have corrected them. 
+
+
+
+
+% \begin{quote}
+% The cat in the box is \DIFdelbegin \DIFdel{dead}\DIFdelend \DIFaddbegin \DIFadd{alive}\DIFaddend .
+% \begin{align}
+% E &= mc^2 \\
+% m\cdot \DIFdelbegin \DIFdel{a=F}\DIFdelend \DIFaddbegin \DIFadd{v=p}\DIFaddend .
+% \end{align}
+% \end{quote}
+
+\balance
+\bibliographystyle{IEEEtran}
+\bibliography{ref/references.bib,ref/conf.bib}
+
+\end{document}
