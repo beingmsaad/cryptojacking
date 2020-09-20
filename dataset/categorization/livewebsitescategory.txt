@@ -1,0 +1,2 @@
+category_names1 = ['Info Tech', 'Entertainment', 'Uncategorized', 'Sports', 'Adult', 'Media', 'Education', 'Illegal Content', 'Business', 'Shopping']
+res = [3, 17, 12, 2, 3, 4, 24, 6, 24, 5 ]
